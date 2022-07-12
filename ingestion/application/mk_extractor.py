@@ -43,6 +43,7 @@ class MKExtractor:
 
     def general_formatting(self, df, batch_date):
         df["batch_date"] = datetime.strptime(batch_date, "%Y-%m-%d").date()
+        df["processing_date"] = datetime.now().date()
         return df
 
     def load(self, df, table_name):

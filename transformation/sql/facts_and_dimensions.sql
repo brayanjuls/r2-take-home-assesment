@@ -18,7 +18,8 @@ select sd.store_id,
        cast(split_part(s.amount,'$',2) AS DECIMAL),
        s.source_id,
        rd.role_id, -- is it relevant ?
-       s.batch_date
+       s.batch_date,
+       s.processing_date
 from sales s
 inner join stores_dim sd on s.store_token = sd.store_token
 inner join role_dim rd on s.user_role = rd.user_role
@@ -29,4 +30,5 @@ ON CONFLICT(store_id,transaction_id)
                   amount=excluded.amount,
                   source_id=excluded.source_id,
                   role_id=excluded.role_id,
-                  batch_date=excluded.batch_date;
+                  batch_date=excluded.batch_date
+                  processing_date=excluded.processing_date;
