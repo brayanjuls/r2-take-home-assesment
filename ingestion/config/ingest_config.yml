@@ -1,0 +1,39 @@
+# configuration specific to the source
+source:
+  root_path: '/Users/brayanjules/Projects/personal/data_engineer/datasets/sales_marketplace/'
+  file_name: 'sales_{0}.csv.gz'
+  batch_date: '2020-01-26'
+  columns:
+      - store_token:str
+      - transaction_id:str
+      - receipt_token:str
+      - transaction_time:str
+      - amount:str
+      - source_id:str
+      - user_role:str
+  file_date_format: '%Y%m%d'
+
+# configuration specific to the target PG_USER PG_PASSWORD
+target:
+  table_name: 'sales'
+  user: 'postgres'
+  password: '1qazxsw2'
+  host: 'localhost'
+  port: '5433'
+  db: 'postgres'
+
+
+# Logging configuration
+logging:
+  version: 1
+  formatters:
+    ingest:
+      format: "Ingestion Tool - %(asctime)s - %(levelname)s - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: ingest
+      level: DEBUG
+  root:
+    level: DEBUG
+    handlers: [console]
