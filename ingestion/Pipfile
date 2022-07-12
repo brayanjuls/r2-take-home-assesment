@@ -9,6 +9,7 @@ boto3 = "*"
 psycopg2 = "*"
 sqlalchemy = "*"
 pyyaml = "*"
+numpy = ">=1.22"
 
 [dev-packages]
 
