@@ -1,6 +1,9 @@
 # Take Home Assessment
 
 ### Data Profiling
+
+If you want to visualize the data profile, download the following html files and open then in your favorite browser.
+
 [Sales Profiling](ingestion/sales_t.html)
 
 [Stores Profiling](ingestion/stores_t.html)
