@@ -10,7 +10,7 @@ psycopg2 = "*"
 sqlalchemy = "*"
 pyyaml = "*"
 numpy = ">=1.22"
-
+pandas-profiling = ">=3.2.0"
 [dev-packages]
 
 [requires]

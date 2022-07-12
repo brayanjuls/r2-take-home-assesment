@@ -1,3 +1,18 @@
+-- Report transaction processed by batch date
+select
+       batch_date,
+       processing_date,
+       count(transaction_id),
+       count(
+           case when sf.amount > 100 then 1
+           else null
+           end
+           ) as valid_transaction, -- what is represent a valid transaction in this dataset ?
+       count(*) as filtered_transaction -- this will depend on the previous question.
+from sales_fact sf
+group by 1,2
+
+
 -- Report Sales by Transaction
 with
      month_amount_t as (
@@ -25,7 +40,7 @@ select date(sf.transaction_time) as transaction_date,
        sum(sf.amount) as total_sales_amount,
        round(avg(sf.amount),2) as avg_sales_amount,
        mat.total_amount_of_month as trx_month_sales_amount,
-       tst.store_token as top_store_sales_token
+       tst.store_token as top_store_sales_token -- IT is ok, if it is the first one ?
 from sales_fact sf inner join month_amount_t mat
 on mat.month_year = to_char(sf.transaction_time, 'YYYYMM')
 inner join top_store_token_t tst on tst.store_id = sf.store_id and tst.row_num = 1
@@ -64,4 +79,4 @@ select tst.transaction_date,
        tst.store_token,
        tst.store_name
        from top_storage_token tst
-where tst.rank_id <= 5
+where tst.rank_id <= 5;
